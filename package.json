@@ -16,6 +16,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "piston-client": "^1.0.2",
     "probot": "^12.2.4"
   },
   "devDependencies": {
