@@ -1,8 +1,9 @@
 const fs = require("fs");
 
 const pullRequestHandler = async (context) => {
-  console.log("pullRequestHandler");
-  const { owner, repo } = context.issue();
+  console.log("\npullRequestHandler\n");
+
+  const { owner, repo, issue_number } = context.issue();
   const {
     body,
     title,

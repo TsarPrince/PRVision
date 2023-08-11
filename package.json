@@ -11,6 +11,7 @@
     "github",
     "probot-app"
   ],
+  "type": "commonjs",
   "scripts": {
     "start": "probot run ./index.js",
     "test": "jest"
