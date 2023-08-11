@@ -14,5 +14,5 @@ module.exports = (app) => {
     pullRequestHandler
   );
 
-  app.on("issue_comment.created", commentsHandler);
+  app.on(["issue_comment.created"], commentsHandler);
 };
