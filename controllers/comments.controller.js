@@ -45,8 +45,14 @@ const commentsHandler = async (context) => {
               {
                 ...runtime,
                 files: [
+                  // 🪲🪲🪲
+                  // PISTON BUG: providing name results in error response
+                  // for cpp files because backend is running
+                  // ./a.out instead of ./filename.out
+                  // MESSAGE: /piston/packages/gcc/10.2.0/run: line 6: ./a.out: No such file or directory
+                  // 🪲🪲🪲
                   {
-                    name: filename,
+                    // name: filename,
                     content: fileContent.data,
                   },
                 ],
