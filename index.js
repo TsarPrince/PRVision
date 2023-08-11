@@ -9,12 +9,10 @@ module.exports = (app) => {
   app.on(
     ["pull_request.opened", "pull_request.edited", "pull_request.reopened"],
     async (context) => {
-      if (context.payload.pull_request.title.indexOf("🤖") > -1) {
-        await context.octokit.pulls.createReview({
-          ...context.pullRequest(),
-          event: "APPROVE",
-        });
-      }
+      const { owner, repo, number } = context.issue();
+
+      fs.writeFileSync("out.json", JSON.stringify(context.payload, null, 2));
+      fs.writeFileSync("out2.json", JSON.stringify(context.issue(), null, 2));
     }
   );
 
