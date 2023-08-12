@@ -10,7 +10,7 @@ const getRuntime = (extension) => {
 };
 
 const searchExecuteCmd = (message) => {
-  // split the comment with whitespaces
+  // split the message with whitespaces
   // ASSUMPTION: /execute command is always followed by a filename
   const indexOfExecuteCmd = message.split(/\s+/).indexOf("/execute");
   const filename = message.split(/\s+/)[indexOfExecuteCmd + 1];
@@ -104,7 +104,7 @@ const findFileAndExecute = async (
       owner,
       repo,
       issue_number,
-      body: `File \`${commentFileName}\` not found in this pull request. Available files are:\n\`\`\`\n${files.data.reduce(
+      body: `File \`${inputFileName}\` not found in this pull request. Available files are:\n\`\`\`\n${files.data.reduce(
         (accumulator, current) => accumulator + current.filename + "\n",
         ""
       )}\n\`\`\``,
