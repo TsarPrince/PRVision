@@ -10,5 +10,9 @@ using namespace std;
 const int M = 1e9 + 7;
 
 int main() {
-    fastio for (int i = 0; i < 10; i++) { cout << i << nl; }
+    fastio for (int i = 0; i < 10; i++) {
+        cout << i << nl;
+        dlkfnglk;
+        fsm
+    }
 }
