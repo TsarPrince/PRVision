@@ -13,6 +13,7 @@ int main() {
     fastio
 
         for (int i = 0; i < 10; i++) {
-        cout << i << nl
+        cout << i << nl;
+        asldjfom
     }
 }
