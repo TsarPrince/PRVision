@@ -29,11 +29,12 @@ To run a file:
 - Create your code file and open a Pull Request.
 - Since the bot uses the exact file location, you can place your file anywhere with any name.
 - The bot looks up for the following command to run your file:
-  - `/execute path/to/file`
-- You can pass on this command in your commit messages while creating the PR or as a commment afterwards.
+  - `/execute path/to/file` for example: `/execute code/test.py` 
+- You can pass on this command in your commit messages while creating the PR or as a comment afterwards.
 - Words following or preceeding the cmd above will be ignored.
 - Compile timeout: 10 seconds
 - Run timeout: 3 seconds
+- A list of supported languages along with there runtime versions can be found [here]([url](https://emkc.org/api/v2/piston/runtimes)).
 
 ## Permission(s) required:
 
