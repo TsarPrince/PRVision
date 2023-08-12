@@ -9,7 +9,8 @@ module.exports = (app) => {
   app.log.info("PRvision started!");
 
   app.on(
-    ["pull_request.opened", "pull_request.edited", "pull_request.reopened"],
+    // ["pull_request.opened", "pull_request.edited", "pull_request.reopened"],
+    "pull_request",
     pullRequestHandler
   );
 
