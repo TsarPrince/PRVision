@@ -1,5 +1,5 @@
 const pullRequestHandler = async (context) => {
-  console.log("\npullRequestHandler\n");
+  console.log("\nPull Request Handler\n");
 
   const { owner, repo, issue_number } = context.issue();
   // const { body, title, number: pull_number } = context.payload.pull_request;
@@ -13,9 +13,8 @@ const pullRequestHandler = async (context) => {
       pull_number: issue_number,
     });
 
-    // Do something with the new commits
-    console.log("New commits:", commits.data);
-    require("fs").writeFileSync("commits.json", JSON.stringify(commits.data));
+    // This lists all the commits in the pull request
+    console.log("#commits in this PR: ", commits.data?.length);
   }
 };
 

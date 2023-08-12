@@ -4,6 +4,7 @@
 
 const pullRequestHandler = require("./controllers/pullRequest.controller");
 const commentsHandler = require("./controllers/comments.controller");
+const pushHandler = require("./controllers/push.controller");
 
 module.exports = (app) => {
   app.log.info("PRvision started!");
@@ -14,5 +15,6 @@ module.exports = (app) => {
     pullRequestHandler
   );
 
-  app.on(["issue_comment.created"], commentsHandler);
+  app.on("issue_comment.created", commentsHandler);
+  app.on("push", pushHandler);
 };

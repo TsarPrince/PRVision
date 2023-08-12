@@ -2,7 +2,7 @@ const axios = require("axios");
 const { getRuntime } = require("../utils");
 
 const commentsHandler = async (context) => {
-  console.log("\ncommentsHandler\n");
+  console.log("\nComments Handler\n");
 
   const { owner, repo, issue_number } = context.issue();
 
