@@ -1,0 +1,83 @@
+{
+  "status": 200,
+  "url": "https://api.github.com/repos/TsarPrince/PRVision/pulls/3/files",
+  "headers": {
+    "access-control-allow-origin": "*",
+    "access-control-expose-headers": "ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Used, X-RateLimit-Resource, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, X-GitHub-SSO, X-GitHub-Request-Id, Deprecation, Sunset",
+    "cache-control": "private, max-age=60, s-maxage=60",
+    "connection": "close",
+    "content-encoding": "gzip",
+    "content-security-policy": "default-src 'none'",
+    "content-type": "application/json; charset=utf-8",
+    "date": "Fri, 11 Aug 2023 22:03:39 GMT",
+    "etag": "W/\"c688cdb0e1543af77dacb3c5b5853ef6d0ed47f317cb1ac7ad90bba2038c9f26\"",
+    "last-modified": "Fri, 11 Aug 2023 22:03:37 GMT",
+    "referrer-policy": "origin-when-cross-origin, strict-origin-when-cross-origin",
+    "server": "GitHub.com",
+    "strict-transport-security": "max-age=31536000; includeSubdomains; preload",
+    "transfer-encoding": "chunked",
+    "vary": "Accept, Authorization, Cookie, X-GitHub-OTP, Accept-Encoding, Accept, X-Requested-With",
+    "x-accepted-github-permissions": "pull_requests=read",
+    "x-content-type-options": "nosniff",
+    "x-frame-options": "deny",
+    "x-github-api-version-selected": "2022-11-28",
+    "x-github-media-type": "github.v3; format=json",
+    "x-github-request-id": "EF2E:399B8C:197B63F:1AC2D19:64D6B03A",
+    "x-ratelimit-limit": "5000",
+    "x-ratelimit-remaining": "4997",
+    "x-ratelimit-reset": "1691793730",
+    "x-ratelimit-resource": "core",
+    "x-ratelimit-used": "3",
+    "x-xss-protection": "0"
+  },
+  "data": [
+    {
+      "sha": "9c58b649fa17e942a9aaf7c7d9e71c920238f4eb",
+      "filename": "controllers/comments.controller.js",
+      "status": "modified",
+      "additions": 28,
+      "deletions": 23,
+      "changes": 51,
+      "blob_url": "https://github.com/TsarPrince/PRVision/blob/a5fe22b5257736e357449d701109eec4697f3584/controllers%2Fcomments.controller.js",
+      "raw_url": "https://github.com/TsarPrince/PRVision/raw/a5fe22b5257736e357449d701109eec4697f3584/controllers%2Fcomments.controller.js",
+      "contents_url": "https://api.github.com/repos/TsarPrince/PRVision/contents/controllers%2Fcomments.controller.js?ref=a5fe22b5257736e357449d701109eec4697f3584",
+      "patch": "@@ -1,43 +1,48 @@\n const commentsHandler = async (context) => {\n-  const { owner, repo, number } = context.issue();\n-  console.log(\"commentsHandler\");\n+  console.log(\"\\ncommentsHandler\\n\");\n+\n+  const { owner, repo, issue_number } = context.issue();\n   const octokit = context.octokit;\n+  console.log({ owner, repo, issue_number });\n \n   // Check if the comment was posted on a pull request\n   if (context.payload.issue.pull_request) {\n     const pullRequest = await octokit.rest.pulls.get({\n       owner,\n       repo,\n-      pull_number: number,\n+      pull_number: issue_number,\n     });\n+    console.log({ pullRequest });\n \n     const commandRegex = /\\/execute/i;\n     const hasExecuteCommand = commandRegex.test(context.payload.comment.body);\n+    console.log(context.payload.comment.body);\n \n     if (hasExecuteCommand) {\n       const code = context.payload.comment.body;\n+      console.log(code);\n \n-      try {\n-        const pistonClient = new piston.Client();\n-        const executionResult = await pistonClient.execute(code);\n+      // try {\n+      //   const pistonClient = new piston.Client();\n+      //   const executionResult = await pistonClient.execute(code);\n \n-        // Post the execution result as a reply to the comment\n-        await octokit.rest.issues.createComment({\n-          owner,\n-          repo,\n-          issue_number: number,\n-          body: `Execution Result:\\n\\`\\`\\`\\n${executionResult}\\n\\`\\`\\``,\n-        });\n-      } catch (error) {\n-        // Handle any errors during code execution\n-        console.error(\"Error executing code:\", error);\n-        await octokit.rest.issues.createComment({\n-          owner,\n-          repo,\n-          issue_number: number,\n-          body: `Error executing code:\\n\\`\\`\\`\\n${error.message}\\n\\`\\`\\``,\n-        });\n-      }\n+      //   // Post the execution result as a reply to the comment\n+      //   await octokit.rest.issues.createComment({\n+      //     owner,\n+      //     repo,\n+      //     issue_number,\n+      //     body: `Execution Result:\\n\\`\\`\\`\\n${executionResult}\\n\\`\\`\\``,\n+      //   });\n+      // } catch (error) {\n+      //   // Handle any errors during code execution\n+      //   console.error(\"Error executing code:\", error);\n+      //   await octokit.rest.issues.createComment({\n+      //     owner,\n+      //     repo,\n+      //     issue_number,\n+      //     body: `Error executing code:\\n\\`\\`\\`\\n${error.message}\\n\\`\\`\\``,\n+      //   });\n+      // }\n     }\n   }\n };"
+    },
+    {
+      "sha": "2c370f8405210c58da05d5f9ee72cab1f963152d",
+      "filename": "controllers/pullRequest.controller.js",
+      "status": "modified",
+      "additions": 3,
+      "deletions": 2,
+      "changes": 5,
+      "blob_url": "https://github.com/TsarPrince/PRVision/blob/a5fe22b5257736e357449d701109eec4697f3584/controllers%2FpullRequest.controller.js",
+      "raw_url": "https://github.com/TsarPrince/PRVision/raw/a5fe22b5257736e357449d701109eec4697f3584/controllers%2FpullRequest.controller.js",
+      "contents_url": "https://api.github.com/repos/TsarPrince/PRVision/contents/controllers%2FpullRequest.controller.js?ref=a5fe22b5257736e357449d701109eec4697f3584",
+      "patch": "@@ -1,8 +1,9 @@\n const fs = require(\"fs\");\n \n const pullRequestHandler = async (context) => {\n-  console.log(\"pullRequestHandler\");\n-  const { owner, repo } = context.issue();\n+  console.log(\"\\npullRequestHandler\\n\");\n+\n+  const { owner, repo, issue_number } = context.issue();\n   const {\n     body,\n     title,"
+    },
+    {
+      "sha": "3b35fd977061573b22519db5a265db445ffd671c",
+      "filename": "package-lock.json",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 2,
+      "changes": 4,
+      "blob_url": "https://github.com/TsarPrince/PRVision/blob/a5fe22b5257736e357449d701109eec4697f3584/package-lock.json",
+      "raw_url": "https://github.com/TsarPrince/PRVision/raw/a5fe22b5257736e357449d701109eec4697f3584/package-lock.json",
+      "contents_url": "https://api.github.com/repos/TsarPrince/PRVision/contents/package-lock.json?ref=a5fe22b5257736e357449d701109eec4697f3584",
+      "patch": "@@ -1,11 +1,11 @@\n {\n-  \"name\": \"PRemix\",\n+  \"name\": \"PRVision\",\n   \"version\": \"1.0.0\",\n   \"lockfileVersion\": 2,\n   \"requires\": true,\n   \"packages\": {\n     \"\": {\n-      \"name\": \"PRemix\",\n+      \"name\": \"PRVision\",\n       \"version\": \"1.0.0\",\n       \"license\": \"ISC\",\n       \"dependencies\": {"
+    },
+    {
+      "sha": "91c6bf636e27e6066e6034597997f609a3c860ec",
+      "filename": "package.json",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 0,
+      "changes": 1,
+      "blob_url": "https://github.com/TsarPrince/PRVision/blob/a5fe22b5257736e357449d701109eec4697f3584/package.json",
+      "raw_url": "https://github.com/TsarPrince/PRVision/raw/a5fe22b5257736e357449d701109eec4697f3584/package.json",
+      "contents_url": "https://api.github.com/repos/TsarPrince/PRVision/contents/package.json?ref=a5fe22b5257736e357449d701109eec4697f3584",
+      "patch": "@@ -11,6 +11,7 @@\n     \"github\",\n     \"probot-app\"\n   ],\n+  \"type\": \"commonjs\",\n   \"scripts\": {\n     \"start\": \"probot run ./index.js\",\n     \"test\": \"jest\""
+    }
+  ]
+}

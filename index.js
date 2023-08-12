@@ -1,5 +1,4 @@
 /**
- * This is the main entrypoint to your Probot app
  * @param {import('probot').Probot} app
  */
 
@@ -10,7 +9,8 @@ module.exports = (app) => {
   app.log.info("PRvision started!");
 
   app.on(
-    ["pull_request.opened", "pull_request.edited", "pull_request.reopened"],
+    // ["pull_request.opened", "pull_request.edited", "pull_request.reopened"],
+    "pull_request",
     pullRequestHandler
   );
 

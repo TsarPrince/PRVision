@@ -1,24 +1,37 @@
-const fs = require("fs");
+const { searchExecuteCmd, findFileAndExecute } = require("../utils");
 
 const pullRequestHandler = async (context) => {
-  console.log("pullRequestHandler");
-  const { owner, repo } = context.issue();
-  const {
-    body,
-    title,
-    number: pull_number,
-    comments_url,
-  } = context.payload.pull_request;
+  console.log("\nPull Request Handler\n");
 
-  // s.split(" ").indexOf("/execute");
+  const { owner, repo, issue_number } = context.issue();
+  // const { body, title, number: pull_number } = context.payload.pull_request;
 
-  const pullRequestFiles = await context.octokit.rest.pulls.listFiles({
-    owner,
-    repo,
-    pull_number,
-  });
+  // Check if the action is 'synchronize'
+  if (context.payload.action === "synchronize") {
+    // New commits were pushed to the pull request
+    const commits = await context.octokit.pulls.listCommits({
+      owner,
+      repo,
+      pull_number: issue_number,
+    });
 
-  fs.writeFileSync("out.json", JSON.stringify(pullRequestFiles, null, 2));
+    // This lists all the commits in the pull request
+    // last one can be accessed however
+    // this may quickly contribute to a huge payload
+    console.log("#commits in this PR: ", commits.data?.length);
+
+    const lastCommit = commits.data?.pop();
+    const { message } = lastCommit.commit;
+    const { present, filename: messageFileName } = searchExecuteCmd(message);
+    if (!present) return;
+    await findFileAndExecute(
+      context,
+      owner,
+      repo,
+      issue_number,
+      messageFileName
+    );
+  }
 };
 
 module.exports = pullRequestHandler;

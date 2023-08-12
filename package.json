@@ -11,11 +11,13 @@
     "github",
     "probot-app"
   ],
+  "type": "commonjs",
   "scripts": {
     "start": "probot run ./index.js",
     "test": "jest"
   },
   "dependencies": {
+    "axios": "^1.4.0",
     "probot": "^12.2.4"
   },
   "devDependencies": {
