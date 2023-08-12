@@ -1,4 +1,1 @@
-if true:
-    
-    
-print("grape")
+print("🍇🍇🍇")
