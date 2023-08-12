@@ -20,7 +20,13 @@ const searchExecuteCmd = (message) => {
   };
 };
 
-const findFileAndExecute = async (owner, repo, issue_number, filename) => {
+const findFileAndExecute = async (
+  context,
+  owner,
+  repo,
+  issue_number,
+  inputFileName
+) => {
   const files = await context.octokit.rest.pulls.listFiles({
     owner,
     repo,
@@ -30,7 +36,7 @@ const findFileAndExecute = async (owner, repo, issue_number, filename) => {
   let fileFound = false;
   for (const file of files.data) {
     const { filename, raw_url } = file;
-    if (filename == commentFileName) {
+    if (filename == inputFileName) {
       fileFound = true;
       try {
         const fileExtension = filename.split(".").pop();

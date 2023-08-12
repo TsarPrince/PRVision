@@ -12,7 +12,13 @@ const commentsHandler = async (context) => {
     const { present, filename: commentFileName } = searchExecuteCmd(comment);
     if (!present) return;
 
-    await findFileAndExecute(owner, repo, issue_number, commentFileName);
+    await findFileAndExecute(
+      context,
+      owner,
+      repo,
+      issue_number,
+      commentFileName
+    );
   }
 };
 
