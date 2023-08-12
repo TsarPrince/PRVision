@@ -34,6 +34,7 @@ const findFileAndExecute = async (
     pull_number: issue_number,
   });
 
+  console.log({ owner, repo, issue_number, inputFileName });
   let fileFound = false;
   for (const file of files.data) {
     const { filename, raw_url } = file;
@@ -43,6 +44,7 @@ const findFileAndExecute = async (
         const fileExtension = filename.split(".").pop();
         const fileContent = await axios.get(raw_url);
         const runtime = getRuntime(fileExtension);
+        console.log(fileContent.data);
 
         // Credits: Piston Public API
         // https://github.com/engineer-man/piston#public-api
