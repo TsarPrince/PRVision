@@ -1,4 +1,3 @@
-const axios = require("axios");
 const { searchExecuteCmd, findFileAndExecute } = require("../utils");
 
 const commentsHandler = async (context) => {

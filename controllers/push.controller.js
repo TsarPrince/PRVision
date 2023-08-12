@@ -4,7 +4,7 @@ const pushHandler = async (context) => {
   console.log("\nPush Handler\n");
 
   const { owner, repo, issue_number } = context.issue();
-  // issue_number is undefined for push events even in PRs
+  // issue_number is undefined for push events in PRs
   const commits = context.payload.commits;
 
   // multiple commits can be pushed at once
