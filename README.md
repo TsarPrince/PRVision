@@ -22,6 +22,10 @@ docker build -t PRemix .
 docker run -e APP_ID=<app-id> -e PRIVATE_KEY=<pem-value> PRemix
 ```
 
+## Screen Recording
+
+https://drive.google.com/file/d/1rsFNDi8VRq5DA8tNeVuVCvxCkCcRNyNq/view?usp=sharing
+
 ## How to use?
 
 To run a file:
