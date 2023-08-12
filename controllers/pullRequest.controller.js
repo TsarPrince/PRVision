@@ -13,10 +13,17 @@ const pullRequestHandler = async (context) => {
       pull_number: issue_number,
     });
 
+    // ⚠️⚠️⚠️
     // This lists all the commits in the pull request
-    // last one can be accessed by using commits.data.pop()
-    // however this may quickly contribute to a huge payload
+    // last one can be accessed however
+    // this may quickly contribute to a huge payload
+    // ⚠️⚠️⚠️
     console.log("#commits in this PR: ", commits.data?.length);
+    const lastCommit = commits.data?.pop();
+    const { message } = lastCommit.commit;
+    const { present, filename: messageFileName } = searchExecuteCmd(message);
+    if (!present) return;
+    await findFileAndExecute(owner, repo, issue_number, messageFileName);
   }
 };
 
