@@ -1,4 +1,5 @@
 const { searchExecuteCmd } = require("../utils");
+console.log(searchExecuteCmd);
 
 const pushHandler = async (context) => {
   console.log("\nPush Handler\n");
