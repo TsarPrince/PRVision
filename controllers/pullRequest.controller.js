@@ -15,6 +15,7 @@ const pullRequestHandler = async (context) => {
 
     // Do something with the new commits
     console.log("New commits:", commits.data);
+    require("fs").writeFileSync("commits.json", JSON.stringify(commits.data));
   }
 };
 
