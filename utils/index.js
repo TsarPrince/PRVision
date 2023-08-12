@@ -8,6 +8,19 @@ const getRuntime = (extension) => {
   }
 };
 
+const searchExecuteCmd = (message) => {
+  // split the comment with whitespaces
+  // ASSUMPTION: /execute command is always followed by a filename
+  const indexOfExecuteCmd = comment.split(/\s+/).indexOf("/execute");
+  const filename = comment.split(/\s+/)[indexOfExecuteCmd + 1];
+
+  return {
+    present: indexOfExecuteCmd !== -1,
+    filename,
+  };
+};
+
 module.exports = {
   getRuntime,
+  searchExecuteCmd,
 };

@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { getRuntime } = require("../utils");
+const { getRuntime, searchExecuteCmd } = require("../utils");
 
 const commentsHandler = async (context) => {
   console.log("\nComments Handler\n");
@@ -10,13 +10,9 @@ const commentsHandler = async (context) => {
   if (context.payload.issue.pull_request) {
     const comment = context.payload.comment.body;
 
-    // split the comment with whitespaces
-    // ASSUMPTION: /execute command is always followed by a filename
-    const indexOfExecuteCmd = comment.split(/\s+/).indexOf("/execute");
+    const { present, filename: commentFileName } = searchExecuteCmd(comment);
+    if (!present) return;
 
-    if (indexOfExecuteCmd === -1) return;
-
-    const commentFileName = comment.split(/\s+/)[indexOfExecuteCmd + 1];
     const pullRequestFiles = await context.octokit.rest.pulls.listFiles({
       owner,
       repo,
