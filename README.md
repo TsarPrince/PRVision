@@ -24,12 +24,12 @@ docker run -e APP_ID=<app-id> -e PRIVATE_KEY=<pem-value> PRemix
 
 ## Permission(s) required:
 
-| `permission`        | `event` it listens to |
-| ------------------- | --------------------- |
-| contents: read      | push                  |
-| issues: write       | issue_comment         |
-| pull_requests: read | pull_request          |
-| metadata: read      | (mandatory)           |
+| `permission`         | `event` it listens to |
+| -------------------- | --------------------- |
+| contents: read       | push                  |
+| issues: write        | issue_comment         |
+| pull_requests: write | pull_request          |
+| metadata: read       | (mandatory)           |
 
 ## Contributing
 
