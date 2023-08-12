@@ -1,18 +1,21 @@
-const fs = require("fs");
-
 const pullRequestHandler = async (context) => {
   console.log("\npullRequestHandler\n");
 
   const { owner, repo, issue_number } = context.issue();
-  const { body, title, number: pull_number } = context.payload.pull_request;
+  // const { body, title, number: pull_number } = context.payload.pull_request;
 
-  const pullRequestFiles = await context.octokit.rest.pulls.listFiles({
-    owner,
-    repo,
-    pull_number,
-  });
+  // Check if the action is 'synchronize'
+  if (context.payload.action === "synchronize") {
+    // New commits were pushed to the pull request
+    const commits = await context.octokit.pulls.listCommits({
+      owner,
+      repo,
+      pull_number: issue_number,
+    });
 
-  fs.writeFileSync("out.json", JSON.stringify(pullRequestFiles, null, 2));
+    // Do something with the new commits
+    console.log("New commits:", commits.data);
+  }
 };
 
 module.exports = pullRequestHandler;

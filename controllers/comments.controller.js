@@ -61,6 +61,7 @@ const commentsHandler = async (context) => {
             }
           );
           const executionResult = response.data;
+
           // Post the execution result as a reply to the comment
           await context.octokit.rest.issues.createComment({
             owner,
