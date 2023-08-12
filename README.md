@@ -22,6 +22,19 @@ docker build -t PRemix .
 docker run -e APP_ID=<app-id> -e PRIVATE_KEY=<pem-value> PRemix
 ```
 
+## How to use?
+
+To run a file:
+
+- Create your code file and open a Pull Request.
+- Since the bot uses the exact file location, you can place your file anywhere with any name.
+- The bot looks up for the following command to run your file:
+  - `/execute path/to/file`
+- You can pass on this command in your commit messages while creating the PR or as a commment afterwards.
+- Words following or preceeding the cmd above will be ignored.
+- Compile timeout: 10 seconds
+- Run timeout: 3 seconds
+
 ## Permission(s) required:
 
 | `permission`         | `event` it listens to |
