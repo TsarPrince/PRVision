@@ -4,14 +4,7 @@ const pullRequestHandler = async (context) => {
   console.log("\npullRequestHandler\n");
 
   const { owner, repo, issue_number } = context.issue();
-  const {
-    body,
-    title,
-    number: pull_number,
-    comments_url,
-  } = context.payload.pull_request;
-
-  // s.split(" ").indexOf("/execute");
+  const { body, title, number: pull_number } = context.payload.pull_request;
 
   const pullRequestFiles = await context.octokit.rest.pulls.listFiles({
     owner,
