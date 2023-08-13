@@ -10,7 +10,7 @@ const getRuntime = (extension) => {
 };
 
 const searchExecuteCmd = (message) => {
-  // split the comment with whitespaces
+  // split the message with whitespaces
   // ASSUMPTION: /execute command is always followed by a filename
   const indexOfExecuteCmd = message.split(/\s+/).indexOf("/execute");
   const filename = message.split(/\s+/)[indexOfExecuteCmd + 1];
@@ -34,6 +34,7 @@ const findFileAndExecute = async (
     pull_number: issue_number,
   });
 
+  console.log({ owner, repo, issue_number, inputFileName });
   let fileFound = false;
   for (const file of files.data) {
     const { filename, raw_url } = file;
@@ -43,6 +44,7 @@ const findFileAndExecute = async (
         const fileExtension = filename.split(".").pop();
         const fileContent = await axios.get(raw_url);
         const runtime = getRuntime(fileExtension);
+        console.log(fileContent.data);
 
         // Credits: Piston Public API
         // https://github.com/engineer-man/piston#public-api
@@ -102,7 +104,7 @@ const findFileAndExecute = async (
       owner,
       repo,
       issue_number,
-      body: `File \`${commentFileName}\` not found in this pull request. Available files are:\n\`\`\`\n${files.data.reduce(
+      body: `File \`${inputFileName}\` not found in this pull request. Available files are:\n\`\`\`\n${files.data.reduce(
         (accumulator, current) => accumulator + current.filename + "\n",
         ""
       )}\n\`\`\``,

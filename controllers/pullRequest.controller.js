@@ -23,6 +23,7 @@ const pullRequestHandler = async (context) => {
     const lastCommit = commits.data?.pop();
     const { message } = lastCommit.commit;
     const { present, filename: messageFileName } = searchExecuteCmd(message);
+    console.log({ lastCommit, message, present, messageFileName });
     if (!present) return;
     await findFileAndExecute(
       context,
